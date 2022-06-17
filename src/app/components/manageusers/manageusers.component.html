@@ -1,0 +1,55 @@
+<app-navheader></app-navheader>
+
+<div class="container" style="margin-top: 10%;">
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr *ngFor="let item of users">
+        <th scope="row">{{item.id}}</th>
+        <td>{{item.name}}</td>
+        <td>{{item.surname}}</td>
+        <td>{{item.email}}</td>
+      </tr>
+      <!-- <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        colspan="2"
+        <td>Larry 'the Bird'</td>
+        <td>Johnson</td>
+        <td>@twitter</td>
+      </tr> -->
+    <!-- </tbody> -->
+  </table>
+
+</div>
+
+  <div class="container d-flex justify-content-center" >
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+  </div>
+
+
+  <app-footer></app-footer>
+
+<router-outlet></router-outlet>

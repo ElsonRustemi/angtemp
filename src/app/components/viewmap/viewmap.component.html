@@ -1,0 +1,94 @@
+<app-navheader></app-navheader>
+
+
+<!-- <div class="accordion" id="accordionExample" style="width: 15%;">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Actions
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <div>
+          <button type="button" class="btn btn-primary m-2">Add Path</button>
+          <button type="button" class="btn btn-secondary m-2">Update Path</button>
+          <button type="button" class="btn btn-danger m-2">Delete Path</button>
+        </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="card mt-3" style="width: 25rem; margin-left: 62px;">
+  <div class="card-body">
+    <h5 class="card-title">Actions</h5>
+    <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+    <!-- <div class="d-flex flex-inlan"> -->
+      <button type="button" class="btn btn-primary m-2" data-bs-target="addPathModal" (click)="addPath()">Add Path</button>
+      <button type="button" class="btn btn-secondary m-2">Update Path</button>
+      <button type="button" class="btn btn-danger m-2">Delete Path</button>
+    <!-- </div> -->
+  </div>
+</div>
+
+<!-- <div class="d-flex justify-content-start flex-column bd-highlight mb-3 btn-toolbar border border-primary" style="margin: 5px; width: 20%; margin-left: 20px;">
+  <div class="p-2 bd-highlight border-primary border-bottom" style="background-color: #47B5FF;">
+    Actions
+  </div>
+  <div  class="p-2 bd-highlight">
+    <button type="button" class="btn btn-primary m-2">Add Path</button>
+    <button type="button" class="btn btn-secondary m-2">Update Path</button>
+    <button type="button" class="btn btn-danger m-2">Delete Path</button>
+  </div>
+</div> -->
+
+<div class="conatiner d-flex justify-content-center">
+  <div id="map"></div>
+</div>
+
+<ng-template #modalAddPath let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <label for="dateOfBirth">Date of birth</label>
+        <div class="input-group">
+          <!-- <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker"> -->
+          <!-- <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button> -->
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-warning" (click)="modal.close('Cross click')">Back</button>
+    <button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template>
+
+<ng-template #test let-modal>
+  <div class="modal-header">
+    <h4 id="modal-basic-title">Create New User</h4>
+    <!-- <button type="button" aria-label="Close" (click)="modal.dismiss('Cross click');">
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+    <!-- <i class="fa-solid fa-x"></i>
+    <i class="fa-solid fa-rectangle-xmark"></i>
+    <i class="fa-solid fa-xmark" (click)="modal.dismiss('Cross click');"></i> -->
+  </div>
+  <div class="modal-body nom info">
+    Click ok to continue or close to dismiss.
+  </div>
+  <div class="modal-footer">
+    <button nbButton hero class="btn btn-warning" (click)="modal.dismiss('Cross click');" type="button" style="text-transform: unset !important;"
+      data-dismiss="modal">Back</button>
+    <button class="btn btn-primary" nbButton hero (click)="modal.dismiss('Cross click');" style="text-transform: unset !important;">Ok</button>
+  </div>
+</ng-template>
+
+<app-footer></app-footer>
+
+<router-outlet></router-outlet>
