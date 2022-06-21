@@ -10,34 +10,31 @@
         <th scope="col">First</th>
         <th scope="col">Last</th>
         <th scope="col">Handle</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
-    <tbody >
-      <tr *ngFor="let item of users">
+    <tbody>
+      <tr *ngFor="let item of users | paginate:
+      { itemsPerPage: 4, currentPage: p }">
         <th scope="row">{{item.id}}</th>
         <td>{{item.name}}</td>
         <td>{{item.surname}}</td>
         <td>{{item.email}}</td>
+        <td>
+          <button class="btn btn-secondary" (click)="viewModal(item)">View</button>
+          <button class="btn btn-info" style="margin-left: 5px;" (click)="editmodal(item)">Update</button>
+          <button class="btn btn-danger" style="margin-left: 5px;" (click)="deleteModal(item)">Delete</button>
+        </td>
       </tr>
-      <!-- <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        colspan="2"
-        <td>Larry 'the Bird'</td>
-        <td>Johnson</td>
-        <td>@twitter</td>
-      </tr> -->
-    <!-- </tbody> -->
+    </tbody>
   </table>
-
+  <div class="container d-flex justify-content-center">
+    <pagination-controls (pageChange)="p = $event" class="float-right">
+    </pagination-controls>
+  </div>
 </div>
 
-  <div class="container d-flex justify-content-center" >
+<!-- <div class="container d-flex justify-content-center" >
     <nav aria-label="Page navigation example">
       <ul class="pagination">
         <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -47,9 +44,96 @@
         <li class="page-item"><a class="page-link" href="#">Next</a></li>
       </ul>
     </nav>
+  </div> -->
+
+
+
+<ng-template #editModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Update User</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
+  <div class="modal-body">
+    <form>
+      <form class="row g-3" [formGroup]="updateUser" (ngSubmit)="saveUpdateUser()">
 
 
-  <app-footer></app-footer>
+        <div class="col-6">
+          <label class="form-label">Name</label>
+          <input formControlName="name" type="text" class="form-control" [(ngModel)]="selectedUser.name"
+            id="inputAddress" placeholder="">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Surname</label>
+          <input formControlName="surname" type="text" class="form-control" [(ngModel)]="selectedUser.surname"
+            id="inputPassword4">
+        </div>
+        <div class="col-md-12">
+          <label for="inputEmail4" class="form-label">Email</label>
+          <input formControlName="email" type="email" class="form-control" [(ngModel)]="selectedUser.email"
+            id="inputEmail4">
+        </div>
+      </form>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-warning" (click)="modal.close('Cross click')">Back</button>
+    <button type="button" class="btn btn-primary"
+      (click)="modal.close('Save click'); saveUpdateUser(updateUser);">Save</button>
+  </div>
+</ng-template>
+
+
+<ng-template #viewUserModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">View User</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <!-- <form> -->
+    <!-- <form class="row g-3" [formGroup]="updateUser"> -->
+    <div class="row g-3">
+
+      <div class="col-6">
+        <label class="form-label">Name</label>
+        <p>{{selectedUser.name}}</p>
+        <!-- <input type="text" disabled="true" class="form-control" id="inputAddress" placeholder="{{selectedUser.name}}"> -->
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Surname</label>
+        <p>{{selectedUser.surname}}</p>
+        <!-- <input type="text" disabled="true" class="form-control" id="inputPassword4" placeholder="{{selectedUser.surname}}"> -->
+      </div>
+      <div class="col-md-12">
+        <label class="form-label">Email</label>
+        <p>{{selectedUser.email}}</p>
+        <!-- <input type="email" disabled="true" class="form-control" id="inputEmail4" placeholder="{{selectedUser.email}}"> -->
+      </div>
+    </div>
+    <!-- </form> -->
+    <!-- </form> -->
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-warning" (click)="modal.close('Cross click')">Back</button>
+    <!-- <button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Save</button> -->
+  </div>
+</ng-template>
+
+<ng-template #deleteUserModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Delete User</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    Are you sure you want to delete user {{selectedUser.name}}?
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-warning" (click)="modal.close('Cross click')">Back</button>
+    <button type="button" class="btn btn-danger" (click)="modal.close('Save click'); deleteUser()">Delete</button>
+  </div>
+</ng-template>
+
+
+<app-footer></app-footer>
 
 <router-outlet></router-outlet>
